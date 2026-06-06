@@ -1,8 +1,18 @@
-#include <stdio.h>
+ 
+  /* 2D Graphics Editor
+
+   This program uses a 2D character array as a drawing canvas.
+   Users can draw different shapes such as rectangles,
+   lines, triangles and circles using '*' characters. */
+
+
+#include<stdio.h>
 #include <stdlib.h>
 
-#define ROWS 20
-#define COLS 40
+#define ROWS 25
+#define COLS 50
+
+/* Canvas used to store the drawing */
 
 char canvas[ROWS][COLS];
 
@@ -17,6 +27,9 @@ void drawCircle(int centerX, int centerY, int radius);
 
 void clearCanvas();
 
+   /* Main function:
+   Displays menu and handles user choices. */
+
 int main()
 {
     int choice;
@@ -26,9 +39,11 @@ int main()
 
     initializeCanvas();
 
+  /* Repeatedly display menu until user exits */
+
     do
     {
-        printf("\n===== 2D Graphics Editor =====\n");
+        printf("\n===== Mini Graphics Drawing System =====\n");
         printf("1. Draw Rectangle\n");
         printf("2. Draw Line\n");
         printf("3. Draw Triangle\n");
@@ -45,24 +60,28 @@ int main()
                 printf("Enter x y width height: ");
                 scanf("%d%d%d%d", &x, &y, &width, &height);
                 drawRectangle(x, y, width, height);
+                printf("Rectangle added successfully!\n");
                 break;
 
             case 2:
                 printf("Enter x1 y1 x2 y2: ");
                 scanf("%d%d%d%d", &x1, &y1, &x2, &y2);
                 drawLine(x1, y1, x2, y2);
+                printf("Line added successfully!\n");
                 break;
 
             case 3:
                 printf("Enter x y height: ");
                 scanf("%d%d%d", &x, &y, &height);
                 drawTriangle(x, y, height);
+                printf("Triangle added successfully!\n");
                 break;
 
             case 4:
                 printf("Enter centerX centerY radius: ");
                 scanf("%d%d%d", &x, &y, &radius);
                 drawCircle(x, y, radius);
+                printf("Circle added successfully!\n");
                 break;
 
             case 5:
@@ -87,13 +106,19 @@ int main()
     return 0;
 }
 
-/* Initialize canvas with '_' */
+
+ 
+   /* Fill the entire canvas with '_'
+   to represent an empty drawing area. */
+
+
 void initializeCanvas()
 {
     int i, j;
 
     for(i = 0; i < ROWS; i++)
     {
+       /* Traverse each column of the current row */
         for(j = 0; j < COLS; j++)
         {
             canvas[i][j] = '_';
@@ -106,15 +131,20 @@ void clearCanvas()
     initializeCanvas();
 }
 
-/* Display canvas */
+
+   /* Display the complete drawing
+   stored inside the canvas. */
+
 void displayCanvas()
 {
     int i, j;
 
     printf("\n");
+    /* Visit every row */
 
     for(i = 0; i < ROWS; i++)
     {
+      /* Print all characters in the row */
         for(j = 0; j < COLS; j++)
         {
             printf("%c", canvas[i][j]);
@@ -124,21 +154,30 @@ void displayCanvas()
     }
 }
 
-/* Draw Rectangle */
+
+   /* Draw a rectangle using '*'
+   starting from the given x and y position. */
+
 void drawRectangle(int x, int y, int width, int height)
 {
-    int i, j;
+   int i,j;
 
-    for(i = y; i < y + height && i < ROWS; i++)
+/* Move through each row of the rectangle */
+
+for(i = y; i < y + height && i < ROWS; i++)
+{
+    /* Move through each column of the rectangle */
+
+    for(j = x; j < x + width && j < COLS; j++)
     {
-        for(j = x; j < x + width && j < COLS; j++)
-        {
-            canvas[i][j] = '*';
-        }
+        canvas[i][j] = '*';
     }
 }
+}
 
-/* Draw Horizontal / Vertical / Diagonal Line */
+
+
+/* Draw horizontal,vertical and diagonal lines */
 void drawLine(int x1, int y1, int x2, int y2)
 {
     int i;
@@ -172,13 +211,15 @@ void drawLine(int x1, int y1, int x2, int y2)
     }
 }
 
-/* Draw Triangle */
+/* Draw triangle by increasing row by row */
 void drawTriangle(int x, int y, int height)
 {
     int i, j;
+   /* Create each row of the triangle */
 
     for(i = 0; i < height; i++)
     {
+     /* Add stars on both sides of the center */
         for(j = -i; j <= i; j++)
         {
             if(y + i < ROWS &&
@@ -191,17 +232,22 @@ void drawTriangle(int x, int y, int height)
     }
 }
 
-/* Draw Simple Circle */
+/* Draw circle using distance from the centre point */
 void drawCircle(int centerX, int centerY, int radius)
 {
     int x, y;
+   /* Check every position on the canvas */
 
     for(y = 0; y < ROWS; y++)
     {
         for(x = 0; x < COLS; x++)
         {
+          /* Calculate distance from center */
+
             int dx = x - centerX;
             int dy = y - centerY;
+
+          /* Mark points belonging to the circle */
 
             int value = dx * dx + dy * dy;
 
