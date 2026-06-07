@@ -26,6 +26,7 @@ void drawTriangle(int x, int y, int height);
 void drawCircle(int centerX, int centerY, int radius);
 
 void clearCanvas();
+void deleteArea(int x, int y, int width, int height);
 
    /* Main function:
    Displays menu and handles user choices. */
@@ -50,7 +51,8 @@ int main()
         printf("4. Draw Circle\n");
         printf("5. Clear Canvas\n");
         printf("6. Display Canvas\n");
-        printf("7. Exit\n");
+        printf("7. Delete area\n");
+        printf("8. Exit\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
 
@@ -94,6 +96,14 @@ int main()
                 break;
 
             case 7:
+                printf("Enter x y width height: ");
+                scanf("%d%d%d%d",&x, &y, &width, &height);
+
+                deleteArea(x, y, width, height);
+                printf("Selected area deleted successfully!\n");
+                break;
+
+            case 8:
                 printf("Exiting...\n");
                 break;
 
@@ -101,7 +111,7 @@ int main()
                 printf("Invalid choice!\n");
         }
 
-    } while(choice != 7);
+    } while(choice != 8);
 
     return 0;
 }
@@ -256,6 +266,19 @@ void drawCircle(int centerX, int centerY, int radius)
             {
                 canvas[y][x] = '*';
             }
+        }
+    }
+}
+/* Delete a selected area from the canvas */
+void deleteArea(int x, int y, int width, int height)
+{
+    int i, j;
+
+    for(i = y; i < y + height && i < ROWS; i++)
+    {
+        for(j = x; j < x + width && j < COLS; j++)
+        {
+            canvas[i][j] = '_';
         }
     }
 }
