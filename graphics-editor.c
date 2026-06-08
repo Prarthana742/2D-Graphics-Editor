@@ -18,6 +18,8 @@ char canvas[ROWS][COLS];
 
 /* Function Prototypes */
 void initializeCanvas();
+printf("Welcome to the Mini Graphics Drawing System!\n");
+printf("Canvas Size: %d Rows x %d Columns\n", ROWS, COLS);
 void displayCanvas();
 
 void drawRectangle(int x, int y, int width, int height);
@@ -27,6 +29,7 @@ void drawCircle(int centerX, int centerY, int radius);
 
 void clearCanvas();
 void deleteArea(int x, int y, int width, int height);
+void modifyArea();
 
    /* Main function:
    Displays menu and handles user choices. */
@@ -37,6 +40,7 @@ int main()
     int x, y, width, height;
     int x1, y1, x2, y2;
     int radius;
+    int totalShapes=0;
 
     initializeCanvas();
 
@@ -52,7 +56,8 @@ int main()
         printf("5. Clear Canvas\n");
         printf("6. Display Canvas\n");
         printf("7. Delete area\n");
-        printf("8. Exit\n");
+        printf("8. Modify Area\n");
+        printf("9. Exit\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
 
@@ -104,6 +109,10 @@ int main()
                 break;
 
             case 8:
+                modifyArea();
+                break;
+
+            case 9:
                 printf("Exiting...\n");
                 break;
 
