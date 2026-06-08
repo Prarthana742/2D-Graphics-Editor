@@ -18,8 +18,7 @@ char canvas[ROWS][COLS];
 
 /* Function Prototypes */
 void initializeCanvas();
-printf("Welcome to the Mini Graphics Drawing System!\n");
-printf("Canvas Size: %d Rows x %d Columns\n", ROWS, COLS);
+
 void displayCanvas();
 
 void drawRectangle(int x, int y, int width, int height);
@@ -290,4 +289,16 @@ void deleteArea(int x, int y, int width, int height)
             canvas[i][j] = '_';
         }
     }
+}
+/* Modify an area of the canvas */
+void modifyArea()
+{
+    int x, y, width, height;
+
+    printf("Enter area to modify (x y width height): ");
+    scanf("%d%d%d%d", &x, &y, &width, &height);
+
+    deleteArea(x, y, width, height);
+
+    printf("Selected area modified successfully!\n");
 }
