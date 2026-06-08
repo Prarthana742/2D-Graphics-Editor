@@ -16,3 +16,7 @@ This mini project is a simple 2D Graphics Editor developed in C using a 2D chara
 ## Technologies Used
 - C Programming Language
 - 2D Character Array
+
+## Project Objective
+To understand the use of arrays, functions, loops, and basic graphics representation using characters in C programming.
+
