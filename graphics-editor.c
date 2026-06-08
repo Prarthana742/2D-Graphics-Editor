@@ -120,7 +120,7 @@ int main()
                 printf("Invalid choice!\n");
         }
 
-    } while(choice != 8);
+    } while(choice != 9);
 
     return 0;
 }
